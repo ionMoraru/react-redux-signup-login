@@ -44,7 +44,7 @@ class Login extends Component {
                     <div className={'form-group' + (submitted && !false ? ' has-error' : '')}>
                         <label htmlFor="password">Password</label>
                         <input type="password" className="form-control" value={password} onChange={this.handleChange} name="password" />
-                        {submitted && !false &&
+                        {submitted && false &&
                             <div className="help-block">Password is required</div>
                         }
                     </div>
