@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Login from '../Login/Login';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import HomePage from '../HomePage/HomePage';
 import { Router, Route } from 'react-router-dom';
 import { history } from '../_helpers/history';
 import { PrivateRoute } from '../_components/PrivateRoute';
