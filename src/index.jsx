@@ -1,4 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
+import App from './App/App';
 
-render(<h1>hello</h1>, document.getElementById('root'));
+
+const mountNode = document.getElementById('root');
+render(<App />, mountNode);
