@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Login from '../Login/Login';
+import RegisterPage from '../RegisterPage/RegisterPage';
 import { Router, Route } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
@@ -10,7 +11,10 @@ class App extends Component {
         return (
             <div>
                 <Router history={history}>
-                    <Route path='/login' component={Login} />
+                    <div>
+                        <Route path='/login' component={Login} />
+                        <Route path='/register' component={RegisterPage} />
+                    </div>
                 </Router>
             </div>
         );
