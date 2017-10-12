@@ -1,22 +1,39 @@
 import React, { Component } from 'react';
-import Login from '../Login/Login';
-import RegisterPage from '../RegisterPage/RegisterPage';
-import HomePage from '../HomePage/HomePage';
 import { Router, Route } from 'react-router-dom';
-import { history } from '../_helpers/history';
-import { PrivateRoute } from '../_components/PrivateRoute';
+import { connect } from 'react-redux';
+
+import { LoginPage } from '../LoginPage';
+import { RegisterPage } from '../RegisterPage';
+import { HomePage } from '../HomePage';
+import { alertActions } from '../_actions';
+import { history } from '../_helpers';
+import { PrivateRoute } from '../_components';
+
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        
+        const { dispatch } = this.props;
+        history.listen((location, action) => {
+            //clear alert on location change
+            dispatch(alertActions.clear());
+        });
+    }
+    
     render() {
+        const { alert } = this.props;
         return (
             <div className='jumbotron'>
                 <div className='container'>
                     <div className='col-md-8 col-md-offset-2'>
-                        {/* alert */}
+                        {alert.message &&
+                            <div className={`alert ${alert.type}`}>{alert.message}</div>
+                        }
                         <Router history={history}>
                             <div>
                                 <PrivateRoute exact path='/' component={HomePage} />
-                                <Route path='/login' component={Login} />
+                                <Route path='/login' component={LoginPage} />
                                 <Route path='/register' component={RegisterPage} />
                             </div>
                         </Router>
@@ -27,4 +44,12 @@ class App extends Component {
     }
 }
 
-export default App;
+function mapStateToProps(state) {
+    const { alert } = state;
+    return {
+        alert
+    };
+}
+
+const connectedApp = connect(mapStateToProps)(App);
+export { connectedApp as App }; 

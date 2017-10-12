@@ -1,7 +1,18 @@
 import React from 'react';
 import { render } from 'react-dom';
-import App from './App/App';
+import { Provider } from 'react-redux';
 
+import { store } from './_helpers';
+import { App } from './App/App';
+
+// setup fake backend
+import { configureFakeBackend } from './_helpers';
+configureFakeBackend();
 
 const mountNode = document.getElementById('root');
-render(<App />, mountNode);
+render(
+    <Provider store={store}>
+        <App />
+    </Provider>, 
+    mountNode
+);
